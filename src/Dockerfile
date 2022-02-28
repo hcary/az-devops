@@ -39,23 +39,25 @@ RUN curl -sL https://packages.microsoft.com/keys/microsoft.asc | \
 COPY package.tgz /tmp/package.tgz
 RUN tar xzvf package.tgz  -C / && \
     cd /usr/local/bin && \
-    ln -s terraform-1.1.6 terraform
+    ln -s terraform-${TF_VERSION} terraform && \
+    chmod +x /usr/local/bin/user-setup.sh && \
+    rm -rf /var/lib/apt-get/lists/* && \
+    apt-get -y autoremove && \
+    apt-get -y clean && \
+    rm -rf /var/lib/apt/lists/* && \
+    rm -rf /tmp/* && \
+    rm -rf /var/tmp/*
 
-#
-# Install PowerShell
-# RUN cd /tmp && \
-    # dpkg -i packages-microsoft-prod.deb  && \
-    # apt-get install powershell -y
+# WORKDIR /usr/local/bin/
+# COPY user-setup.sh /usr/local/bin/user-setup.sh
+# RUN chmod +x /usr/local/bin/user-setup.sh && \
+#     rm -rf /var/lib/apt-get/lists/* && \
+#         apt-get -y autoremove && \
+#         apt-get -y clean && \
+#         rm -rf /var/lib/apt/lists/* && \
+#         rm -rf /tmp/* && \
+#         rm -rf /var/tmp/*
 
-# RUN curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt-get/doc/apt-get-key.gpg && \
-#     echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt-get.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt-get/sources.list.d/kubernetes.list && \
-#     apt-get update && \
-#     apt-get install -y kubectl
-
-WORKDIR /usr/local/bin/
-COPY user-setup.sh /usr/local/bin/user-setup.sh
-RUN chmod +x /usr/local/bin/user-setup.sh && \
-    rm -rf /var/lib/apt-get/lists/*
 
 # #
 # # Add AWS command line tools

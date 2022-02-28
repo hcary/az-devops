@@ -5,12 +5,11 @@ This project contains the code to create a devops container to be used by devops
 1. Azure CLI
 2. Terraform 
    1. 1.1.0
-   2. 1.1.4" "
-   3. 1.1.6
+   2. 1.1.2
+   3. 1.1.4
+   4. 1.1.6 - Default version
 3. PowerShell
-4. Ansible [core 2.12.2]
-5. Git
-6. Python3
+4. Git
+5. Python3
 
-wget -q https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
-Onc
+https://hub.docker.com/repository/docker/hcary/az-devops
